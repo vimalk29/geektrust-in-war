@@ -17,7 +17,7 @@ import java.util.Map;
 public class FileUtility {
 
   /**
-   * Reads a file, return its content.
+   * Reads a file, return its content as String.
    *
    * @param filePath Path to file, can be absolute or relative.
    * @return String, Content of file. Encoded in UTF-8

@@ -42,10 +42,13 @@ public class WarApplication {
         LinkedHashMap<String, Integer> army = new LinkedHashMap<>();
         final String[] input= content.trim().split("\\s+");
         // Initializing loop from index 1 to
-        // ignore the first word and traverse all the army composition
+        // Ignore the first word and traverse all the army composition
         for(int i=1;i<input.length;++i){
-            final String[] info = input[i].split("(?<=\\D)(?=\\d)");//Split unitType & quantity
-            army.put(info[1], Integer.parseInt(info[0]));
+            // Get Characters
+            final String battalionType= input[i].replaceAll("[^A-Za-z]", "");
+            // Get Number
+            final String units= input[i].replaceAll("[^0-9]", "");
+            army.put(battalionType, Integer.parseInt(units));
         }
         return army;
     }
