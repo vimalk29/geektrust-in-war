@@ -7,6 +7,8 @@
 *.log
 *.gz
 *.class
+local.properties
+.gitattributes
 
 ### STS ###
 .apt_generated
