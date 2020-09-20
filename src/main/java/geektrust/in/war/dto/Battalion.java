@@ -4,12 +4,12 @@ package geektrust.in.war.dto;
 public class Battalion {
     /**
      * This class is being used to calculate and hold the data of battalions
-     *
+     * <p>
      * maxUnits is the number of units lengaburu battalion has
      * falicorniaUnits is the no. of units of this battalion falicornia has deployed
      * unitsDeployed is the minimum no. of units lengaburu should deploy to win
      * exhausted denotes if the battalion units lengaburu is less than required to defeat falicornian army
-     *
+     * <p>
      * Note: It only holds data of one single battalion and doesn't process battalion substitution
      */
     private final Integer maxUnits;
@@ -59,7 +59,7 @@ public class Battalion {
      */
     public Integer canBeAddedFrom(Integer needsToBeAdded) {
         Integer canBeAdded = this.maxUnits - this.unitsDeployed;
-        return canBeAdded > needsToBeAdded ? canBeAdded : needsToBeAdded;
+        return canBeAdded > needsToBeAdded ? needsToBeAdded : canBeAdded;
     }
 
 

@@ -32,14 +32,14 @@ public class WarApplication {
         War war = new War();
         war.substituteExhaustedBattalions(battalionComposition);
 
-        System.out.println(war.decideOutcome());
+        System.out.print(war.decideOutcome());
     }
 
     /**
      * @param content is taken as parameter which is then transformed into a LinkedHashMap
      * @return army
      */
-    public static LinkedHashMap<String, Integer> getFalicorniaArmyAsMap(String content){
+    private static LinkedHashMap<String, Integer> getFalicorniaArmyAsMap(String content){
         LinkedHashMap<String, Integer> army = new LinkedHashMap<>();
         final String[] input= content.trim().split("\\s+");
         // Initializing loop from index 1 to
