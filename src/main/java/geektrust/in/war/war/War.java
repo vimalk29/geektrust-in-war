@@ -25,7 +25,6 @@ public class War {
         for (int index = 0; index < battalionTypeLength; ++index) {
             //Get the battalion
             Battalion currentBattalion = battalionComposition.get(battalionTypeList.get(index));
-
             Battalion adjacentBattalion;
 
             if (index > 0 && currentBattalion.getExhausted()) {

@@ -5,10 +5,10 @@ public class Battalion {
     /**
      * This class is being used to calculate and hold the data of battalions
      *
-     * @param maxUnits lengaburu battalion has
-     * @param falicorniaUnits no. of units of this battalion falicornia has deployed
-     * @param unitsDeployed minimum no. of units lengaburu should deploy to win
-     * @param exhausted denotes if the battalion units lengaburu is less than required to defeat falicornian army
+     * maxUnits is the number of units lengaburu battalion has
+     * falicorniaUnits is the no. of units of this battalion falicornia has deployed
+     * unitsDeployed is the minimum no. of units lengaburu should deploy to win
+     * exhausted denotes if the battalion units lengaburu is less than required to defeat falicornian army
      *
      * Note: It only holds data of one single battalion and doesn't process battalion substitution
      */
@@ -24,13 +24,12 @@ public class Battalion {
     public Battalion(Integer maxUnits, Integer falicorniaUnits) {
         this.maxUnits = maxUnits;
         this.falicorniaUnits = falicorniaUnits;
-        calculateQuantity();
+        calculateUnits();
     }
 
-    private void calculateQuantity() {
+    private void calculateUnits() {
         Integer unitsDeployed = ((int) Math.ceil((double) falicorniaUnits / 2));
         setUnitsDeployed(unitsDeployed);
-        setExhausted();
     }
 
     public void setUnitsDeployedByCapacity() {
@@ -47,7 +46,7 @@ public class Battalion {
         setExhausted();
     }
 
-    public void setUnitsDeployed(Integer unitsDeployed) {
+    private void setUnitsDeployed(Integer unitsDeployed) {
         this.unitsDeployed = unitsDeployed;
         setExhausted();
     }
