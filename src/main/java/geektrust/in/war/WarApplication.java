@@ -21,6 +21,7 @@ public class WarApplication {
 
         String inputString =  FileUtility.fileToString(inputFilePath); //Read file as a String
 
+
         //Contains Falicornia's Army Coposition
         LinkedHashMap<String,Integer> falicorniaArmy = getFalicorniaArmyAsMap(inputString);
 
@@ -38,7 +39,7 @@ public class WarApplication {
      * @param content is taken as parameter which is then transformed into a LinkedHashMap
      * @return army
      */
-    private static LinkedHashMap<String, Integer> getFalicorniaArmyAsMap(String content){
+    public static LinkedHashMap<String, Integer> getFalicorniaArmyAsMap(String content){
         LinkedHashMap<String, Integer> army = new LinkedHashMap<>();
         final String[] input= content.trim().split("\\s+");
         // Initializing loop from index 1 to

@@ -8,7 +8,11 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import geektrust.in.war.dto.Battalion;
+import geektrust.in.war.repositoryservice.ArmyService;
 import geektrust.in.war.util.FileUtility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +31,23 @@ class WarApplicationTest {
     @AfterEach
     void restoringStreamAfterTest() {
         System.setOut(new PrintStream(originalOutputStream));
+    }
+
+    @Test
+    void battalionCompositionCheck() throws IOException {
+        String inputString =  FileUtility.fileToString(FIXTURES + "/input/input3.txt");
+        //Contains Falicornia's Army Coposition
+        LinkedHashMap<String,Integer> falicorniaArmy = WarApplication.getFalicorniaArmyAsMap(inputString);
+        ArmyService armyService = new ArmyService(falicorniaArmy);
+        // Obtains battalion composition of Lengaburu's Army against falicornia without substitution
+        LinkedHashMap<String, Battalion> expected = new LinkedHashMap<>();
+        //Hard coded expected data for input 3
+        expected.put("H", new Battalion(100, falicorniaArmy.get("H") ));
+        expected.put("E", new Battalion(50,  falicorniaArmy.get("E") ));
+        expected.put("AT", new Battalion(10, falicorniaArmy.get("AT") ));
+        expected.put("SG", new Battalion(5,  falicorniaArmy.get("SG") ));
+
+        assertEquals(expected.toString() , armyService.getBattalionComposition().toString() );
     }
 
     @Test
