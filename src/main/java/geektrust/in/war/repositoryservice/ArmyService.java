@@ -1,8 +1,6 @@
 package geektrust.in.war.repositoryservice;
 
-
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import geektrust.in.war.dto.Battalion;
 import geektrust.in.war.repository.ArmyData;
@@ -29,7 +27,7 @@ public class ArmyService {
 
     /**
      * This function calculates the units of each battalion required
-     * It maps Battalion type and it's status for lengaburu's army and returns it
+     * It maps Battalion type and it's status for our army and returns it
      *
      * @return battalionComposition
      * <p>
@@ -46,4 +44,7 @@ public class ArmyService {
         return battalionComposition;
     }
 
+    public ArmyData getArmyData() {
+        return armyData;
+    }
 }
