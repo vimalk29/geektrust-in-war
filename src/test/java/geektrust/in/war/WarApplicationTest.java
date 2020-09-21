@@ -14,56 +14,69 @@ import geektrust.in.war.util.FileUtility;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+/**
+ * WarApplicationTest class helps us to test outcome of the program in case of 3 input
+ * files which are added in the resources directory
+ *
+ * @author vimalk29
+ * @version 1.0
+ */
 class WarApplicationTest {
     private final String FIXTURES = "src/test/resources";
     private final ByteArrayOutputStream temporaryOutputStream = new ByteArrayOutputStream();
     private final PrintStream originalOutputStream = System.out;
 
+    /**
+     * Changes Output Stream to ByteArrayOutputStream
+     * helps us to test for console outputs without problems
+     */
     @BeforeEach
     void changingStreamForTesting() {
         System.setOut(new PrintStream(temporaryOutputStream));
     }
 
+    /**
+     * Changes Output Stream back to System.out
+     */
     @AfterEach
     void restoringStreamAfterTest() {
         System.setOut(new PrintStream(originalOutputStream));
     }
 
-    /*@Test
-    void battalionCompositionCheck() throws IOException {
-        String inputString =  FileUtility.fileToString(FIXTURES + "/input/input3.txt");
-        //Contains Falicornia's Army Coposition
-        LinkedHashMap<String,Integer> falicorniaArmy = WarApplication.getFalicorniaArmyAsMap(inputString);
-        ArmyService armyService = new ArmyService(falicorniaArmy);
-        // Obtains battalion composition of Lengaburu's Army against falicornia without substitution
-        LinkedHashMap<String, Battalion> expected = new LinkedHashMap<>();
-        //Hard coded expected data for input 3
-        expected.put("H", new Battalion(100, falicorniaArmy.get("H") ));
-        expected.put("E", new Battalion(50,  falicorniaArmy.get("E") ));
-        expected.put("AT", new Battalion(10, falicorniaArmy.get("AT") ));
-        expected.put("SG", new Battalion(5,  falicorniaArmy.get("SG") ));
 
-        assertEquals(expected.toString() , armyService.getBattalionComposition().toString() );
-    }*/
-
+    /**
+     * Should give a WINS with input file 1
+     *
+     * @throws IOException if Input file not found
+     */
     @Test
     void shouldGiveWinsInput1() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output1.txt");
-        WarApplication.main(new String[] {FIXTURES + "/input/input1.txt"});
+        WarApplication.main(new String[]{FIXTURES + "/input/input1.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
     }
 
+    /**
+     * Should give a WINS with input file 1
+     *
+     * @throws IOException if Input file not found
+     */
     @Test
-    void shouldGiveWinInput2()throws  IOException {
+    void shouldGiveWinInput2() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output2.txt");
-        WarApplication.main(new String[] {FIXTURES + "/input/input2.txt"});
+        WarApplication.main(new String[]{FIXTURES + "/input/input2.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
     }
 
+    /**
+     * Should give a LOSES with input file 3
+     *
+     * @throws IOException if Input file not found
+     */
     @Test
     void shouldGiveLosesInput3() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output3.txt");
-        WarApplication.main(new String[] {FIXTURES + "/input/input3.txt"});
+        WarApplication.main(new String[]{FIXTURES + "/input/input3.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
     }
 }
