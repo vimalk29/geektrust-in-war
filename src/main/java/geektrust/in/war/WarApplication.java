@@ -1,4 +1,3 @@
-
 package geektrust.in.war;
 
 import java.io.IOException;
@@ -7,6 +6,7 @@ import java.util.LinkedHashMap;
 import geektrust.in.war.dto.Battalion;
 import geektrust.in.war.repositoryservice.ArmyService;
 import geektrust.in.war.util.FileUtility;
+import geektrust.in.war.util.StringUtil;
 import geektrust.in.war.war.War;
 
 /**
@@ -16,49 +16,37 @@ import geektrust.in.war.war.War;
  * @version 1.0
  */
 public class WarApplication {
-
     /**
-     * Assumes that the args will always have correct input file location on it's 0th Index
-     *
      * @param args contains arguments when the app runs
      * @throws IOException Exceptions if any while opening a file
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ArrayIndexOutOfBoundsException {
 
         String inputFilePath = args[0]; //Read file Input Location
 
+        // Get our max army composition
+        LinkedHashMap<String, Integer> maximumUnitsAvailable =
+                StringUtil.getArmyAsMapFromString("ARMY 100H 50E 10AT 5SG");
+
+        //Set army service with respect to our army limit
+        ArmyService armyService = new ArmyService(maximumUnitsAvailable);
+
         String inputString = FileUtility.fileToString(inputFilePath); //Read file as a String
+        //Contains Opponent's Army Composition
+        LinkedHashMap<String, Integer> opponentArmy = StringUtil.getArmyAsMapFromString(inputString);
 
-        //Contains Falicornia's Army Coposition
-        LinkedHashMap<String, Integer> falicorniaArmy = getFalicorniaArmyAsMap(inputString);
+        // Obtains battalion composition of our Army against opponent without substitution
+        LinkedHashMap<String, Battalion> requiredBattalionComposition =
+                armyService.getBattalionComposition(opponentArmy);
 
-        ArmyService armyService = new ArmyService(falicorniaArmy);
-
-        // Obtains battalion composition of Lengaburu's Army against falicornia without substitution
-        LinkedHashMap<String, Battalion> battalionComposition = armyService.getBattalionComposition();
-
+        //Create a War class object
         War war = new War();
-        war.substituteExhaustedBattalions(battalionComposition);
-        //Print the outcome to the console
+
+        //Substitute exhausted battalions
+        war.substituteExhaustedBattalions(requiredBattalionComposition);
+
+        //Print the outcome of the battle to the console
         System.out.print(war.decideBattleOutcome());
     }
 
-    /**
-     * @param content is taken as parameter which is then transformed into a LinkedHashMap
-     * @return army
-     */
-    private static LinkedHashMap<String, Integer> getFalicorniaArmyAsMap(String content) {
-        LinkedHashMap<String, Integer> army = new LinkedHashMap<>();
-        final String[] input = content.trim().split("\\s+");
-        // Initializing loop from index 1 to
-        // Ignore the first word and traverse all the army composition
-        for (int i = 1; i < input.length; ++i) {
-            // Get Characters
-            final String battalionType = input[i].replaceAll("[^A-Za-z]", "");
-            // Get Number
-            final String units = input[i].replaceAll("[^0-9]", "");
-            army.put(battalionType, Integer.parseInt(units));
-        }
-        return army;
-    }
 }

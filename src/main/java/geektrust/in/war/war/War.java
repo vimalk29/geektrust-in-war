@@ -8,7 +8,8 @@ import java.util.Set;
 import geektrust.in.war.dto.Battalion;
 
 /**
- * This is a class which does tow things
+ * This is War class,
+ * It consists of two functionality
  * 1. Substitutes the battalions in order to fit into the max limit consitions
  * 2. Decide the battle outcome of the battalions Lengaburu is going to deploy
  *

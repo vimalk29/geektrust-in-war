@@ -8,22 +8,28 @@ package geektrust.in.war.dto;
  * It helps in figuring us out whether the battalion is exhausted given the current troops deployed and that
  * helps us later to substitute the battalions respectively
  *
+ *
+ *
+ * Battalion class i.e contains all information about battalions.
+ * Properties: maxUits, emblem, encrypted emblem, messageReceived.
+ *
+ *
  * @author vimalk29
  * @version 1.0
  */
 public class Battalion {
     private final Integer maxUnits;
-    private final Integer falicorniaUnits;
+    private final Integer opponentUnits;
     private Integer unitsDeployed;
     private Boolean exhausted;
 
     /**
      * @param maxUnits        maxUnits of the battalion lengaburu's army has
-     * @param falicorniaUnits falicornia battalion units Deployed
+     * @param opponentUnits falicornia battalion units Deployed
      */
-    public Battalion(Integer maxUnits, Integer falicorniaUnits) {
+    public Battalion(Integer maxUnits, Integer opponentUnits) {
         this.maxUnits = maxUnits;
-        this.falicorniaUnits = falicorniaUnits;
+        this.opponentUnits = opponentUnits;
         calculateUnits();
     }
 
@@ -31,7 +37,7 @@ public class Battalion {
      * Calculates and sets how many units needs to be deployed against opponent irrespective of max limits
      */
     private void calculateUnits() {
-        Integer unitsDeployed = ((int) Math.ceil((double) falicorniaUnits / 2));
+        Integer unitsDeployed = ((int) Math.ceil((double) opponentUnits / 2));
         setUnitsDeployed(unitsDeployed);
     }
 
@@ -85,8 +91,8 @@ public class Battalion {
         return maxUnits;
     }
 
-    public Integer getFalicorniaUnits() {
-        return falicorniaUnits;
+    public Integer getOpponentUnits() {
+        return opponentUnits;
     }
 
     public Integer getUnitsDeployed() {
@@ -106,7 +112,7 @@ public class Battalion {
     }
 
     public String toString() {
-        return "{MaxUnits: " + maxUnits + " falicorniaUnits: " +
-                falicorniaUnits + " unitsDeployed: " + unitsDeployed + " exhausted: " + exhausted + "}";
+        return "{MaxUnits: " + maxUnits + " opponentUnits: " +
+                opponentUnits + " unitsDeployed: " + unitsDeployed + " exhausted: " + exhausted + "}";
     }
 }

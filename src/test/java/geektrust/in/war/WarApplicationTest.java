@@ -11,7 +11,9 @@ import java.io.PrintStream;
 
 import geektrust.in.war.util.FileUtility;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -50,7 +52,7 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveWinsInput1() throws IOException {
+    void shouldGiveWinsInputOne() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output1.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input1.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
@@ -62,7 +64,7 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveWinInput2() throws IOException {
+    void shouldGiveWinInputTwo() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output2.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input2.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
@@ -74,9 +76,32 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveLosesInput3() throws IOException {
+    void shouldGiveLosesInputThree() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output3.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input3.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
     }
+
+    /**
+     * Should throw ArrayIndexOutOfBoundsException if no directory is given
+     *
+     * @throws ArrayIndexOutOfBoundsException as no File directory given
+     */
+    @Test
+    void shouldThrowArrayOutOfIndexExceptionIfNoFilesGivenAsArguments() throws ArrayIndexOutOfBoundsException {
+        assertThrows(ArrayIndexOutOfBoundsException.class, ()->WarApplication.main(new String[]{}));
+    }
+
+
+    /**
+     * Should throw ArrayIndexOutOfBoundsException if no directory is given
+     *
+     * @throws ArrayIndexOutOfBoundsException as no File directory given
+     */
+    @Test
+    void shouldNotThrowArrayOutOfIndexExceptionIfFilesGivenAsArguments() throws ArrayIndexOutOfBoundsException {
+        assertDoesNotThrow(()->WarApplication.main(new String[]{FIXTURES + "/input/input3.txt"}));
+    }
+
+
 }

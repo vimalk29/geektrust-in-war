@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Helps to test FileUtility class functions
  * <p>
  * 1. Tests if the IOException is implemented correctly
- * 2. Tests that the FileUtitlity function is able to decode the content correctly
+ * 2. Tests that the FileUtility function is able to decode the content correctly
  *
  * @author vimalk29
  * @version 1.0

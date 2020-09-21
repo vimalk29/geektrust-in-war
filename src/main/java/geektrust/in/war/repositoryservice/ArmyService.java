@@ -11,6 +11,7 @@ import geektrust.in.war.repository.ArmyData;
  * This is Service class for ArmyData,
  * it helps to calculate unsubstituted army composition with respect to lengaburu's army
  *
+ *
  * @author vimalk29
  * @version 1.0
  */
@@ -34,14 +35,12 @@ public class ArmyService {
      * <p>
      * Note: It doesn't substitute exhausted battalions but only gives an overview of battalion units required
      */
-    public LinkedHashMap<String, Battalion> getBattalionComposition() {
-        Map<String, Integer> lengaburuArmy = new ArmyData().getArmy();
-        Map<String, Integer> falicorniaArmy = armyData.getArmy();
-
+    public LinkedHashMap<String, Battalion> getBattalionComposition(LinkedHashMap<String, Integer> opponentArmy) {
+        //Will contain un-substituted battalion composition against opponent
         LinkedHashMap<String, Battalion> battalionComposition = new LinkedHashMap<>();
 
-        for (String battalionType : lengaburuArmy.keySet()) {
-            Battalion battalion = new Battalion(lengaburuArmy.get(battalionType), falicorniaArmy.get(battalionType));
+        for (String battalionType : opponentArmy.keySet()) {
+            Battalion battalion = new Battalion(armyData.getArmy().get(battalionType), opponentArmy.get(battalionType));
             battalionComposition.put(battalionType, battalion);
         }
         return battalionComposition;
