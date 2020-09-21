@@ -22,14 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FileUtilityTest {
     private final String FIXTURES = "src/test/resources";
 
-    /**
-     * Tests
-     * FileUtility.fileToString Should correctly return file content of the file lcation given as parameter
-     *
-     * @throws IOException if the file location is wrong
-     */
     @Test
-    void testFileToString() throws IOException {
+    void shouldConvertFileToStringCorrectly() throws IOException {
         String expected = "FALICORNIA_ATTACK 100H 101E 20AT 5SG";
         assertEquals(expected, FileUtility.fileToString(FIXTURES + "/input/input1.txt"));
     }
@@ -37,8 +31,9 @@ class FileUtilityTest {
     /**
      * If file location is wrong, should throw IOException
      */
+
     @Test
-    void whenExceptionThrown_ExpecatationSatisfies() {
+    void whenExceptionThrownThenExpectationSatisfied() {
         assertThrows(IOException.class, () -> FileUtility.fileToString(FIXTURES + "/input/inputNotExists.txt"));
     }
 
@@ -46,7 +41,7 @@ class FileUtilityTest {
      * If file location is correct, should not throw IOException
      */
     @Test
-    void whenExceptionThrown_ExpecatationFails() {
+    void whenExceptionThrownThenExpectationFails() {
         assertDoesNotThrow(() -> FileUtility.fileToString(FIXTURES + "/input/input1.txt"));
     }
 }

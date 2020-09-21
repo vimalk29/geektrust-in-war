@@ -52,7 +52,7 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveWinsInputOne() throws IOException {
+    void shouldGiveWinsOnInputFileOne() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output1.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input1.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
@@ -64,7 +64,7 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveWinInputTwo() throws IOException {
+    void shouldGiveWinOnInputFileTwo() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output2.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input2.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
@@ -76,7 +76,7 @@ class WarApplicationTest {
      * @throws IOException if Input file not found
      */
     @Test
-    void shouldGiveLosesInputThree() throws IOException {
+    void shouldGiveLosesOnInputFileThree() throws IOException {
         String expected = FileUtility.fileToString(FIXTURES + "/output/output3.txt");
         WarApplication.main(new String[]{FIXTURES + "/input/input3.txt"});
         assertEquals(expected, temporaryOutputStream.toString());
@@ -92,7 +92,6 @@ class WarApplicationTest {
         assertThrows(ArrayIndexOutOfBoundsException.class, ()->WarApplication.main(new String[]{}));
     }
 
-
     /**
      * Should throw ArrayIndexOutOfBoundsException if no directory is given
      *
@@ -102,6 +101,5 @@ class WarApplicationTest {
     void shouldNotThrowArrayOutOfIndexExceptionIfFilesGivenAsArguments() throws ArrayIndexOutOfBoundsException {
         assertDoesNotThrow(()->WarApplication.main(new String[]{FIXTURES + "/input/input3.txt"}));
     }
-
 
 }
